@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fashion Finder — BTP Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">Fashion<strong>Finder</strong></span>
+    </div>
+    <div class="header-actions">
+      <div id="status-badge" class="badge badge--ready">Ready</div>
+      <button id="btn-reset" class="btn btn--ghost">↺ Reset</button>
+    </div>
+  </header>
+
+  <!-- ── Main layout ── -->
+  <main class="layout">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+      <h2 class="sidebar-title">Find Your Style</h2>
+
+      <div class="mode-tabs" role="tablist">
+        <button class="tab tab--active" data-mode="text"       role="tab">Text</button>
+        <button class="tab"             data-mode="image"      role="tab">Image</button>
+        <button class="tab"             data-mode="multimodal" role="tab">Both</button>
+      </div>
+
+      <form id="search-form" enctype="multipart/form-data">
+
+        <div class="field" id="field-text">
+          <label class="label" for="text-input">Describe what you're looking for</label>
+          <textarea id="text-input" name="text" class="textarea"
+                    placeholder="e.g. white floral summer dress…" rows="3"></textarea>
+        </div>
+
+        <div class="field hidden" id="field-image">
+          <label class="label">Upload a reference photo</label>
+          <div class="drop-zone" id="drop-zone">
+            <input type="file" id="image-input" name="image" accept="image/*" class="drop-zone__input" />
+            <div class="drop-zone__body" id="drop-body">
+              <span class="drop-zone__icon">🖼</span>
+              <span class="drop-zone__hint">Drag & drop or <u>browse</u></span>
+            </div>
+            <img id="preview-img" class="drop-zone__preview hidden" alt="preview" />
+            <button type="button" id="btn-clear-img" class="drop-zone__clear hidden">✕</button>
+          </div>
+        </div>
+
+        <div class="field hidden" id="field-weight">
+          <label class="label">
+            Text weight: <strong id="tw-label">50%</strong>
+            &nbsp;/&nbsp; Image weight: <strong id="iw-label">50%</strong>
+          </label>
+          <input type="range" id="weight-slider" name="text_weight"
+                 min="0" max="1" step="0.05" value="0.5" class="slider" />
+          <div class="slider-labels">
+            <span>Image</span><span>Balanced</span><span>Text</span>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-search" class="btn btn--primary">
+          <span class="btn-text">Search</span>
+          <span class="btn-spinner hidden">⟳</span>
+        </button>
+      </form>
+
+      <div class="tips">
+        <p class="tips-title">Try these</p>
+        <div class="chips" id="example-chips">
+          <button class="chip">white graphic t-shirt</button>
+          <button class="chip">floral summer dress</button>
+          <button class="chip">black skinny jeans</button>
+          <button class="chip">blue denim jacket</button>
+          <button class="chip">oversized hoodie</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Results panel ── -->
+    <section class="results-panel">
+
+      <div class="query-bar hidden" id="query-bar">
+        <div class="query-bar__left">
+          <img id="query-thumb" class="query-thumb hidden" alt="query" />
+          <div>
+            <span class="query-bar__label">Results for</span>
+            <span class="query-bar__text" id="query-bar-text"></span>
+          </div>
+        </div>
+        <span class="query-bar__mode" id="query-bar-mode"></span>
+      </div>
+
+      <div class="cards-grid" id="cards-grid">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-state__icon">👗</div>
+          <p>Your recommendations will appear here.</p>
+          <p class="muted">Start by typing a description or uploading a photo.</p>
+        </div>
+      </div>
+
+      <!-- Rejected history strip -->
+      <div class="history-section hidden" id="history-section">
+        <div class="history-row" id="history-row-rejected">
+          <div class="history-row__header">
+            <span class="history-row__dot history-row__dot--rejected"></span>
+            <span class="history-row__label">Rejected</span>
+            <span class="history-row__count" id="rejected-count">0</span>
+          </div>
+          <div class="history-strip" id="history-strip-rejected"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

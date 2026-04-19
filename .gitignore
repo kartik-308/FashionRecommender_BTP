@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.env
+venv/
+
+# Large embedding files (too big for GitHub — 100MB limit)
+data/*.npy
+
+# Uploaded images (user session data)
+uploads/
+
+# IDE
+.vscode/
+.idea/
